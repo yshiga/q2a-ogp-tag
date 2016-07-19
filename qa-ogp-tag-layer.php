@@ -28,8 +28,9 @@ class qa_html_theme_layer extends qa_html_theme_base
 	private function get_image_url()
 	{
 		$content = $this->content['q_view']['raw']['content'];
-		preg_match("/<img.+?src=\"(.+?)\".+?>/", $content, $matches);
-		return $matches[1];
+		preg_match("/<img.*src\s*=\s*[\"|\'](.*?)[\"|\'].*>/i", $content, $matches);
+		$imgurl = htmlspecialchars_decode($matches[1], ENT_QUOTES);
+		return $imgurl;
 	}
 
 	private function get_content_description()
